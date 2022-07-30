@@ -4,26 +4,19 @@
   
     
     <entry>
-      <title>代码演示</title>
-      <link href="/2022/07/29/%E4%BB%A3%E7%A0%81%E5%9D%97%E6%BC%94%E7%A4%BA/%E6%BC%94%E7%A4%BA1/"/>
-      <url>/2022/07/29/%E4%BB%A3%E7%A0%81%E5%9D%97%E6%BC%94%E7%A4%BA/%E6%BC%94%E7%A4%BA1/</url>
-      
-        <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度</p><h2 id="二级标题-1"><a href="#二级标题-1" class="headerlink" title="二级标题"></a>二级标题</h2><p>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度</p><h2 id="二级标题-2"><a href="#二级标题-2" class="headerlink" title="二级标题"></a>二级标题</h2><p>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度<br>打卡时蝴蝶里是否会is奋力奋力花费的合法和力度</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>我的小站诞生啦</title>
       <link href="/2022/07/28/%E6%A2%A6%E7%9A%84%E5%BC%80%E5%A7%8B/"/>
       <url>/2022/07/28/%E6%A2%A6%E7%9A%84%E5%BC%80%E5%A7%8B/</url>
       
-        <content type="html"><![CDATA[<h2 id="梦的开始"><a href="#梦的开始" class="headerlink" title="梦的开始"></a>梦的开始</h2><p>说起来都是缘分啊。大一下学期，几个同学拉我参加了易智瑞故事地图的制作，与学长交流沟通后，我第一次知道前端的存在，于是，也慢慢开始学起了html、css等等，中间也是磕磕绊绊的。期间也慢慢萌生了做个人博客的想法，一方面感觉真的超酷的，另一方面也是锻炼自己的能力，当然主要还是第一点，哈哈哈。</p><p>但真当我从零开始写起后，发现困难还是不少，毕竟很多知识还没有熟练地掌握，于是在尝试了一段时间后就放弃了。最终还是选择了基于已有的框架hexo（Hexo 是一款基于 Node.js 的静态博客框架）来完成。以后我将不断更新内容，毕竟学习新语言的过程中，有条理的笔记真的很重要，另外也算是一种督促和记录吧。未来我也将持续完善这个网站。</p><p>既然决定了，就要坚定的走下去啊。一起成长吧！</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="梦的开始"><a href="#梦的开始" class="headerlink" title="梦的开始"></a>梦的开始</h2><p>说起来都是缘分啊。大一下学期，几个同学拉我参加了易智瑞故事地图的制作，与学长交流沟通后，我第一次知道前端的存在，于是，也慢慢开始学起了html、css等等，中间也是磕磕绊绊的。期间也慢慢萌生了做个人博客的想法，一方面感觉真的超酷的，另一方面也是锻炼自己的能力，当然主要还是第一点，哈哈哈。</p><p>但真当我从零开始写起后，发现困难还是不少，毕竟很多知识还没有熟练地掌握，现有的知识储备也只能写一些很简陋的网站。最终，我决定了基于已有的框架hexo（Hexo 是一款基于 Node.js 的静态博客框架）来完成。以后我将不断更新内容，毕竟学习新语言的过程中，有条理的笔记真的很重要，另外也算是一种督促和记录吧。未来我也将持续完善这个网站。</p><p>既然决定了，就要坚定的走下去啊。一起成长吧！</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 个人博客 </tag>
+            
+        </tags>
       
     </entry>
     
