@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>js中的小疑惑 —— class中的箭头函数 | 小袁同学</title><meta name="keywords" content="JS"><meta name="author" content="小袁同学"><meta name="copyright" content="小袁同学"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="class的原理，this指向问题、class中的箭头函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的小疑惑 —— class中的箭头函数">
+<meta property="og:url" content="https://yuanruixin.github.io/2023/04/24/JS%E7%AC%94%E8%AE%B0/class%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="小袁同学">
+<meta property="og:description" content="class的原理，this指向问题、class中的箭头函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg">
+<meta property="article:published_time" content="2023-04-24T07:11:37.150Z">
+<meta property="article:modified_time" content="2023-04-24T07:13:47.001Z">
+<meta property="article:author" content="小袁同学">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2022/08/18/w975dneulXGVjpv.png"><link rel="canonical" href="https://yuanruixin.github.io/2023/04/24/JS%E7%AC%94%E8%AE%B0/class%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'js中的小疑惑 —— class中的箭头函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-24 15:13:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3615877_94e17bu4mn5.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2022/07/29/wA3zD7P1ETgF2iW.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-th"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-link"></i><span> 找链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-user"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/stars/"><i class="fa-fw fas fa-star"></i><span> 我的收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fas fa-heart"></i><span> 关注我</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fa fa-comment"></i><span> 留言板</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">小袁同学</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-th"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-link"></i><span> 找链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fa fa-user"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/stars/"><i class="fa-fw fas fa-star"></i><span> 我的收藏</span></a></li></ul></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fas fa-heart"></i><span> 关注我</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fa fa-comment"></i><span> 留言板</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">js中的小疑惑 —— class中的箭头函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-24T07:11:37.150Z" title="发表于 2023-04-24 15:11:37">2023-04-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-24T07:13:47.001Z" title="更新于 2023-04-24 15:13:47">2023-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">js学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="js中的小疑惑 —— class中的箭头函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>最近在学习Node的过程中，遇到了一个小问题，在此稍稍总结一下</p>
+<h3 id="一、ES6之前如何创建类"><a href="#一、ES6之前如何创建类" class="headerlink" title="一、ES6之前如何创建类"></a>一、ES6之前如何创建类</h3><p>尽管在ES6中class关键词已经得到全面支持，但在没有class的时候，早期版本的JavaScript是如何创建类的呢？在这里我们有必要了解，这样有帮助我们理解，在使用class关键字时，”底层”发生了什么。</p>
+<p>使用构造函数进行创建</p>
+<p>构造函数是一种专门用于初始化新对象的函数，构造函数要使用new关键字调用，因此构造函数本身只需要初始化新对象的状态。构造函数调用的关键在于构造函数的prototype属性将被用作新对象的原型。我们再来回忆下new关键字的底层原理吧（哈哈，貌似讲着讲着就变成回忆各种原理了，了解一下也有好处嘛）</p>
+<blockquote>
+<p>new操作符的原理</p>
+<ul>
+<li><p>1.创建一个新对象</p>
+</li>
+<li><p>2.空对象的内部属性 _<em>proto</em>_ 赋值为构造函数的 prototype 属性</p>
+</li>
+<li><p>3.将构造函数的this指向新对象</p>
+</li>
+<li><p>4.执行构造函数内部代码</p>
+</li>
+<li><p>5.返回该新对象</p>
+</li>
+</ul>
+</blockquote>
+<p>好了，扯了这么多，我们再来回来看看ES6之前一般是如何创建对象的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="title function_">sing</span>(<span class="params"></span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>+<span class="string">&quot;小猫在唱歌&quot;</span>);&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> tomCat = <span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;tom&quot;</span>)</span><br><span class="line">tomCat.<span class="title function_">sing</span>()  <span class="comment">//结果：tom小猫在唱歌</span></span><br></pre></td></tr></table></figure>
+
+<p>我们创建每一个函数都有一个 prototype（原型）属性，指向一个对象。这个对象的用途是包含所有特定类型（例子是 Cat）的所有实例共享方法（sing）。</p>
+<p>如果用ES6中的关键字class，那么上面代码就会变成这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">sing</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;小猫在唱歌&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> tomCat = <span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;tom&quot;</span>)</span><br><span class="line">tomCat.<span class="title function_">sing</span>()  <span class="comment">//结果：tom小猫在唱歌</span></span><br></pre></td></tr></table></figure>
+
+<p>其实上面<strong>两种定义的类工作方式完全一样</strong>，理解这一点非常重要，class关键字并没有改变JavaScript类基于原型的本质，在class内部定义的普通函数（箭头函数比较特殊）会被添加到类的原型prototype中。class只能算作是一种语法糖，目的在于让程序员可以更快速地创建。</p>
+<h3 id="二、class中的箭头函数"><a href="#二、class中的箭头函数" class="headerlink" title="二、class中的箭头函数"></a>二、class中的箭头函数</h3><p>上面我们说道，在class中使用普通函数时，普通函数会被添加到类的prototype上。但箭头函数士特殊的，当我们使用箭头函数时，箭头函数会被自动添加到构造函数constructor中。这两者有什么区别呢？我们接下来就来看一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通函数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">sing</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;小猫在唱歌&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> tomCat = <span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;tom&quot;</span>)</span><br><span class="line">tomCat.<span class="title function_">sing</span>()  <span class="comment">//结果：tom小猫在唱歌</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用箭头函数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sing = <span class="function">()=&gt;</span>&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;小狗在唱歌&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> jackDog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&quot;Jack&quot;</span>)</span><br><span class="line">jackDog.<span class="title function_">sing</span>()  <span class="comment">//结果：Jack小狗在唱歌</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们分别输出类的原型（Cat.prototype，Dog.prototype）时，</p>
+<blockquote>
+<p>{constructor: ƒ, sing: ƒ}</p>
+<p>{constructor: ƒ}</p>
+</blockquote>
+<p>上面表明，箭头函数的确是不会添加到原型上的。事实上啊，箭头函数会被编译到constructor里面作为this.xxx = xxx 使用。这意味着，伴随每一次类的实例化，箭头函数都将同时被实例化一次。</p>
+<p>于是，很多人觉得这样做会出现性能问题，毕竟添加到原型上只需创建一次，所有实例就可以共享添加的方法了。</p>
+<h3 id="三、js中的this问题"><a href="#三、js中的this问题" class="headerlink" title="三、js中的this问题"></a>三、js中的this问题</h3><h4 id="1-问题引入"><a href="#1-问题引入" class="headerlink" title="1.问题引入"></a>1.问题引入</h4><p>那么，在class中使用箭头函数有什么用呢？既然它有性能问题，那么我们该如何解决呢。我们先来看一个案例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用箭头函数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">sing</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;小狗在唱歌&quot;</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> jackDog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&quot;Jack&quot;</span>) <span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">const</span> sing = jackDog.<span class="property">sing</span>  <span class="comment">//将sum的引用赋值给新变量sum </span></span><br><span class="line"><span class="title function_">sing</span>()          <span class="comment">//Uncaught TypeError: Cannot read property &#x27;sing&#x27; of undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们运行上面的代码时，就会报错，无法正常执行。浏览器告诉我们无法从undefined上获取sing方法。这是怎么回事呢，我们稍稍修改一下，把class内部的sing方法的函数体，改为打印this。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">sing</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时我们会惊讶的发现，this居然变成了this（但如果使用我们之前的方法，用“.属性”的方式，即jackDog.sing()方式调用，这时的this为实例本身）。</p>
+<p>这是怎么回事呢？且往下看</p>
+<blockquote>
+<p>每个函数都有一个隐式的 <code>this</code> 形参。将函数作为方法调用时，这个参数会被设置为用于访问该方法的对象。这和大多数[面向对象语言]中的 <code>this</code>（或 <code>self</code>）含义相同。但是 JavaScript 在「关联到对象的方法」与「独立函数」这两者之间，使用了单一的定义形式。<strong>这使 <code>this</code> 导致了许多程序员的困惑和 bug。</strong></p>
+</blockquote>
+<h4 id="2-函数与类中的this"><a href="#2-函数与类中的this" class="headerlink" title="2.函数与类中的this"></a>2.函数与类中的this</h4><p>看了上面的内容，是不是稍稍有点疑惑，没关系，我们再来简单的梳理一下</p>
+<p>事实上，对于许多编程语言来说，只有类中有this，函数内部是没有thisD的。而js中每一个函数也有自己的this，于是这就造成了上面我们提到的问题。</p>
+<ul>
+<li>函数中的this</li>
+</ul>
+<p>js默认的普通函数this指向代用它的对象，如果没有调用他的对象，则其指向undefined或window（严格模式下指向undefined，非严格模式下指向window）。而箭头函数比较特殊，永远指向函数外的this。</p>
+<ul>
+<li>类中的this</li>
+</ul>
+<p>事实上， 类的方法内部如果有this，默认指向类的实例</p>
+<p>这样我们也就能明白为什么上面this打印的内容为undefined了，由于sing()运行在全局中，其this为undefined，故出现了上述问题。进而，我们也就无法获取对应的方法或属性。我们来看一下JS创始人对此的一些说明。</p>
+<blockquote>
+<p>每个函数都有一个隐式的 <code>this</code> 形参。将函数作为方法调用时，这个参数会被设置为用于访问该方法的对象。这和大多数[面向对象语言]中的 <code>this</code>（或 <code>self</code>）含义相同。但是 JavaScript 在「关联到对象的方法」与「独立函数」这两者之间，使用了单一的定义形式。<strong>这使 <code>this</code> 导致了许多程序员的困惑和 bug。</strong></p>
+</blockquote>
+<h4 id="3-解决方法："><a href="#3-解决方法：" class="headerlink" title="3.解决方法："></a>3.解决方法：</h4><h5 id="2-1-使用箭头函数解决"><a href="#2-1-使用箭头函数解决" class="headerlink" title="2.1.使用箭头函数解决"></a>2.1.使用箭头函数解决</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用箭头函数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">	&#125;</span><br><span class="line">	sing = <span class="function">()=&gt;</span> &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> jackDog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&quot;Jack&quot;</span>) <span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">const</span> sing = jackDog.<span class="property">sing</span> <span class="comment">//将sum的引用赋值给新变量sum</span></span><br><span class="line"><span class="title function_">sing</span>()         </span><br></pre></td></tr></table></figure>
+
+<p>我们分析一下原因，箭头函数中的this，只和定义该箭头函数的位置有关系，即箭头函数中的this始终是该箭头函数所在作用域中的this。在第二个部分，我们已经了解到在类中使用箭头函数时，伴随每一次类的实例化，箭头函数都将同时被实例化一次。故此处箭头函数所在的作用域中的this指向类的实例对象。</p>
+<h5 id="2-2-使用bind绑定解决"><a href="#2-2-使用bind绑定解决" class="headerlink" title="2.2.使用bind绑定解决"></a>2.2.使用bind绑定解决</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">sing</span> = <span class="variable language_">this</span>.<span class="property">sing</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>)  <span class="comment">//这样当我们调用sing方法时，this就永远指向实例</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">sing</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> jackDog = <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="string">&quot;Jack&quot;</span>) <span class="comment">//实例化</span></span><br><span class="line"><span class="keyword">const</span> sing = jackDog.<span class="property">sing</span> <span class="comment">//将sum的引用赋值给新变量sum</span></span><br><span class="line"><span class="title function_">sing</span>()</span><br></pre></td></tr></table></figure>
+
+<p>两种方法的对比：使用箭头函数时，其不会添加到类的原型中，相当于在每个类被实例时，会在实例中单独的添加一个对应的方法。而使用bind绑定法，类中所定义的方法，是被添加到类的原型中，这样所有的实例可以共享这个方法。所以，如果希望追求极致的性能，可以使用bind来解决class中的this问题。</p>
+<p>当然，如果我们再来回到底层，探究箭头函数的原理。事实上，<strong>箭头函数底层相当于.bind(); 永远绑定外部this</strong>。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JS/">JS</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/20/css%E7%AC%94%E8%AE%B0/01_%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD/"><img class="next-cover" src="https://s2.loli.net/2023/04/20/mOM7hHNtp8gXLDr.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css中常用的居中方式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/22/JS%E7%AC%94%E8%AE%B0/1.1_JavaScript%E5%9F%BA%E7%A1%80/" title="js语言基础（一）—— 基础知识"><img class="cover" src="https://s2.loli.net/2022/08/31/CD2rxjeqs1K4ZJp.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-22</div><div class="title">js语言基础（一）—— 基础知识</div></div></a></div><div><a href="/2022/08/25/JS%E7%AC%94%E8%AE%B0/1.2_%E5%87%BD%E6%95%B0/" title="js语言基础(二) —— 基本函数的使用"><img class="cover" src="https://s2.loli.net/2022/07/29/rwxcb8IiQKS7fXM.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-25</div><div class="title">js语言基础(二) —— 基本函数的使用</div></div></a></div><div><a href="/2022/08/29/JS%E7%AC%94%E8%AE%B0/1.4_%E6%95%B0%E7%BB%84/" title="js语言基础（四）—— 数组、高阶函数、闭包等"><img class="cover" src="https://s2.loli.net/2022/08/31/DKNmx9no2LfeSlX.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-29</div><div class="title">js语言基础（四）—— 数组、高阶函数、闭包等</div></div></a></div><div><a href="/2022/08/26/JS%E7%AC%94%E8%AE%B0/1.3_JavaScrip%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="js语言基础（三）—— 面向对象编程"><img class="cover" src="https://s2.loli.net/2022/08/31/SxVAXfFwebn27My.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-26</div><div class="title">js语言基础（三）—— 面向对象编程</div></div></a></div><div><a href="/2023/04/19/JS%E7%AC%94%E8%AE%B0/2.1_%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" title="JS事件传播与事件委托"><img class="cover" src="https://s2.loli.net/2023/04/19/tSoO4efXai612Tk.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-19</div><div class="title">JS事件传播与事件委托</div></div></a></div><div><a href="/2022/08/31/JS%E7%AC%94%E8%AE%B0/1.5_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" title="简单聊聊js中的内置对象"><img class="cover" src="https://s2.loli.net/2022/08/31/7jeVHp8ziChB9AL.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-31</div><div class="title">简单聊聊js中的内置对象</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81NjkxNi8zMzM4MA=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2022/07/29/wA3zD7P1ETgF2iW.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小袁同学</div><div class="author-info__description">一个不可爱的男孩子</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yuanruixin"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yuanruixin" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/352902219" target="_blank" title="Bilibili"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_62090293?spm=1001.2014.3001.5343" target="_blank" title="CSDN"><i class="iconfont icon-csdn"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到小袁同学的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81ES6%E4%B9%8B%E5%89%8D%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%B1%BB"><span class="toc-text">一、ES6之前如何创建类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81class%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-text">二、class中的箭头函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81js%E4%B8%AD%E7%9A%84this%E9%97%AE%E9%A2%98"><span class="toc-text">三、js中的this问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5"><span class="toc-text">1.问题引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%87%BD%E6%95%B0%E4%B8%8E%E7%B1%BB%E4%B8%AD%E7%9A%84this"><span class="toc-text">2.函数与类中的this</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">3.解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E8%A7%A3%E5%86%B3"><span class="toc-text">2.1.使用箭头函数解决</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-%E4%BD%BF%E7%94%A8bind%E7%BB%91%E5%AE%9A%E8%A7%A3%E5%86%B3"><span class="toc-text">2.2.使用bind绑定解决</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/24/JS%E7%AC%94%E8%AE%B0/class%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" title="js中的小疑惑 —— class中的箭头函数"><img src="https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="js中的小疑惑 —— class中的箭头函数"/></a><div class="content"><a class="title" href="/2023/04/24/JS%E7%AC%94%E8%AE%B0/class%E4%B8%AD%E7%9A%84%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/" title="js中的小疑惑 —— class中的箭头函数">js中的小疑惑 —— class中的箭头函数</a><time datetime="2023-04-24T07:11:37.150Z" title="发表于 2023-04-24 15:11:37">2023-04-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/20/css%E7%AC%94%E8%AE%B0/01_%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD/" title="css中常用的居中方式"><img src="https://s2.loli.net/2023/04/20/mOM7hHNtp8gXLDr.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="css中常用的居中方式"/></a><div class="content"><a class="title" href="/2023/04/20/css%E7%AC%94%E8%AE%B0/01_%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD/" title="css中常用的居中方式">css中常用的居中方式</a><time datetime="2023-04-20T13:20:38.728Z" title="发表于 2023-04-20 21:20:38">2023-04-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/19/JS%E7%AC%94%E8%AE%B0/2.1_%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" title="JS事件传播与事件委托"><img src="https://s2.loli.net/2023/04/19/tSoO4efXai612Tk.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS事件传播与事件委托"/></a><div class="content"><a class="title" href="/2023/04/19/JS%E7%AC%94%E8%AE%B0/2.1_%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" title="JS事件传播与事件委托">JS事件传播与事件委托</a><time datetime="2023-04-19T05:30:43.166Z" title="发表于 2023-04-19 13:30:43">2023-04-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/09/python/%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93/" title="Python，兜兜转转，我又回来啦。"><img src="https://s2.loli.net/2022/07/29/GQeqc4D6ZCIB2LU.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python，兜兜转转，我又回来啦。"/></a><div class="content"><a class="title" href="/2022/10/09/python/%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93/" title="Python，兜兜转转，我又回来啦。">Python，兜兜转转，我又回来啦。</a><time datetime="2022-10-09T10:23:22.792Z" title="发表于 2022-10-09 18:23:22">2022-10-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/31/JS%E7%AC%94%E8%AE%B0/1.5_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" title="简单聊聊js中的内置对象"><img src="https://s2.loli.net/2022/08/31/7jeVHp8ziChB9AL.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="简单聊聊js中的内置对象"/></a><div class="content"><a class="title" href="/2022/08/31/JS%E7%AC%94%E8%AE%B0/1.5_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" title="简单聊聊js中的内置对象">简单聊聊js中的内置对象</a><time datetime="2022-08-31T10:27:26.653Z" title="发表于 2022-08-31 18:27:26">2022-08-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 小袁同学</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
